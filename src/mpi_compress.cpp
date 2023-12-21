@@ -1,14 +1,13 @@
-#include<vector>
-#include<fstream>
-#include<sstream>
-#include<algorithm>
-#include<windows.h>
-#include<iostream>
-#include<bitset>
-#include"pfd.h"
+#include <vector>
+#include <fstream>
+#include <sstream>
+#include <algorithm>
+#include <windows.h>
+#include <iostream>
+#include <bitset>
+#include "pfd.h"
 #include <mpi.h>
 #define LIST_NUM 2000
-#define NUM_THREADS 4
 using namespace std;
 
 int main(int argc, char* argv[])

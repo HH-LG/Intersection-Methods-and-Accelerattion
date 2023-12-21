@@ -66,35 +66,6 @@ void dgapCompress(const vector<unsigned>& invertedIndex, vector<unsigned>& resul
 	}
 }
 
-// invertedIndex: dgap压缩好的倒排索引
-// result：解缩后的索引
-// idx：从第idx个bit开始解压
-// return：解压后大小（bit)
-//int dgapDecompress(const vector<unsigned>& compressedLists, vector<unsigned>& result,int& idx)
-//{
-//	//前32位是长度
-//	unsigned len = readBitData(compressedLists, idx, 32);
-//	// cout << len << endl;
-//	if (len == 0)
-//		return -1;
-//
-//	//6位是用的Bit数
-//	int bitNum = (int)readBitData(compressedLists, idx+32, 6);
-//	idx += 38;
-//
-//	unsigned delta = readBitData(compressedLists, idx, bitNum);
-//	idx += bitNum;
-//	result.push_back(delta);//第一个delta直接进去
-//	for (unsigned i = 1; i < len; i++)
-//	{
-//		delta = readBitData(compressedLists,idx,bitNum);
-//		idx += bitNum;
-//		result.push_back(result[i - 1] + delta);//后续的都要加上前一个放进去
-//	}
-//	return idx;
-//}
-
-
  //invertedIndex: dgap压缩好的倒排索引
  //result：解缩后的索引
  //idx：从第idx个bit开始解压

@@ -1,11 +1,12 @@
-#include<iostream>
-#include<vector>
-#include<Windows.h>
-#include<algorithm>
-#include"InvertedIndex.h"
-#include"util.h"
-#include"Adp.h"
-#include"Adp_SSE.h"
+#include <iostream>
+#include <vector>
+#include <Windows.h>
+#include <algorithm>
+#include "InvertedIndex.h"
+#include "util.h"
+#include "Adp.h"
+#include "Adp_SSE.h"
+#include "Bitmap.h"
 
 using namespace std;
 	
@@ -31,8 +32,8 @@ int main() {
 	//测试
 	//verify();
 	//读取二进制文件
-	alignas(16) static vector<InvertedIndex> invertedLists;
-	alignas(16) static int query[1000][5] = { 0 };// 单个查询最多5个docId,全部读取
+	static vector<InvertedIndex> invertedLists;
+	static int query[1000][5] = { 0 };// 单个查询最多5个docId,全部读取
 	int count;
 	getData(invertedLists, query,count);
 	//------svs求交------
@@ -40,7 +41,7 @@ int main() {
 
 	//预处理
 	//preprocessing(invertedLists, 2000);
-	//bitMapProcessing(invertedLists, 2000);
+	bitMapProcessing(invertedLists, 2000);
 	//bitMapSSEProcessing(invertedLists, 2000);
 	int step = 50;
 	for (int k = 50; k <= count; k += step)
@@ -62,7 +63,7 @@ int main() {
 					list[j] = query[i][j];
 				sorted(list, (invertedLists), num);//按长度排序
                 // 
-                ADP_SSE(list, invertedLists, num);
+                S_BITMAP(list, invertedLists, num);
 			}
 			QueryPerformanceCounter((LARGE_INTEGER*)&tail);// End Time
 			totalTime += (tail - head) * 1000.0 / freq;
