@@ -7,10 +7,12 @@
 #include "Adp.h"
 #include "Adp_SSE.h"
 #include "Bitmap.h"
+#include "Hash.h"
+
+#define Algorithm Bitmap
 
 using namespace std;
 	
-//TODO:修改为nlogn-------------------------------------------
 // 把倒排列表按长度排序
 void sorted(int* list, vector<InvertedIndex>& idx, int num) 
 {
@@ -36,13 +38,14 @@ int main() {
 	static int query[1000][5] = { 0 };// 单个查询最多5个docId,全部读取
 	int count;
 	getData(invertedLists, query,count);
-	//------svs求交------
+	//------倒排链表求交------
 	long long head, tail, freq;
 
 	//预处理
-	//preprocessing(invertedLists, 2000);
-	bitMapProcessing(invertedLists, 2000);
-	//bitMapSSEProcessing(invertedLists, 2000);
+	if (Algorithm == HASH)
+		preprocessing(invertedLists, 2000);
+	if (Algorithm == Bitmap)
+		bitMapProcessing(invertedLists, 2000);
 	int step = 50;
 	for (int k = 50; k <= count; k += step)
 	{	
@@ -62,8 +65,7 @@ int main() {
 				for (int j = 0; j < num; j++)
 					list[j] = query[i][j];
 				sorted(list, (invertedLists), num);//按长度排序
-                // 
-                S_BITMAP(list, invertedLists, num);
+                Algorithm(list, invertedLists, num);
 			}
 			QueryPerformanceCounter((LARGE_INTEGER*)&tail);// End Time
 			totalTime += (tail - head) * 1000.0 / freq;

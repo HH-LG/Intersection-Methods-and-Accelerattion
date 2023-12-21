@@ -9,6 +9,7 @@
 #include <pmmintrin.h>  //sse3
 #include <omp.h>
 #include"InvertedIndex.h"
+#define Bitmap S_BITMAP
 extern vector<InvertedIndex> invertedLists;
 struct BitMap
 {
@@ -40,16 +41,11 @@ struct BitMap
 }; 
 BitMap bitmapList[2000];//开空间
 BitMap chosenList;
-list<int> skipPointer;
 void bitMapProcessing(vector<InvertedIndex>& invertedLists, int count)
 {
 	for (int i = 0; i < count; i++)
-		for (int j = 0; j < invertedLists[i].docIdList.size(); j++)
+		for (int j = 0; j < (int)invertedLists[i].docIdList.size(); j++)
 			bitmapList[i].set(invertedLists[i].docIdList[j]);	//建立id对应bitmap
-	//建立跳表
-	for (int i = 0; i < bitmapList[0].secondIndex.size(); i++)
-		skipPointer.push_back(i);
-
 }
 InvertedIndex S_BITMAP(int* list, vector<InvertedIndex>& idx, int num)
 {
@@ -86,7 +82,7 @@ InvertedIndex S_BITMAP(int* list, vector<InvertedIndex>& idx, int num)
 								{
 									if ((bit & 1) != 0)
 										res.docIdList.push_back(32 * l + m);
-										bit = bit >> 1;
+									bit = bit >> 1;
 								}
 							}
 						}
