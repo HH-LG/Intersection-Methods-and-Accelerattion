@@ -1,0 +1,7 @@
+# 不上传的文件
+*.o
+*.d
+*.exe
+*.bin
+ExpIndex
+ExpQuery
