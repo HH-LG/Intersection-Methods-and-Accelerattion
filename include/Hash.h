@@ -27,7 +27,7 @@ void preprocessing(vector<InvertedIndex>& index, int count) {
 		}
 	}
 }
-InvertedIndex HASH(int* queryList, vector<InvertedIndex>& index, int num) {
+InvertedIndex Hash(int* queryList, vector<InvertedIndex>& index, int num) {
 	InvertedIndex s = index[queryList[0]];// 选出最短的倒排列表
 	int count = 0;
 	for (int i = 1; i < num; i++) {// 与剩余列表求交

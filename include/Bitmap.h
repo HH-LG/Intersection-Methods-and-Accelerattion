@@ -3,11 +3,6 @@
 #include<list>
 #include<vector>
 #include<algorithm>
-#include <mmintrin.h>   //mmx
-#include <xmmintrin.h>  //sse
-#include <emmintrin.h>  //sse2
-#include <pmmintrin.h>  //sse3
-#include <omp.h>
 #include"InvertedIndex.h"
 #define Bitmap S_BITMAP
 extern vector<InvertedIndex> invertedLists;
@@ -41,18 +36,20 @@ struct BitMap
 }; 
 BitMap bitmapList[2000];//开空间
 BitMap chosenList;
+list<int> skipPointer;
 void bitMapProcessing(vector<InvertedIndex>& invertedLists, int count)
 {
 	for (int i = 0; i < count; i++)
 		for (int j = 0; j < (int)invertedLists[i].docIdList.size(); j++)
 			bitmapList[i].set(invertedLists[i].docIdList[j]);	//建立id对应bitmap
+	//建立跳表
+	for (int i = 0; i < (int)bitmapList[0].secondIndex.size(); i++)
+		skipPointer.push_back(i);
+
 }
 InvertedIndex S_BITMAP(int* list, vector<InvertedIndex>& idx, int num)
 {
 	
-	int len = bitmapList[list[0]].secondIndex.size();
-	len = len / 4;
-
 	copy(bitmapList[list[0]].secondIndex.begin(), bitmapList[list[0]].secondIndex.end(), chosenList.secondIndex.begin());
 	copy(bitmapList[list[0]].firstIndex.begin(), bitmapList[list[0]].firstIndex.end(), chosenList.firstIndex.begin());
 	copy(bitmapList[list[0]].bits.begin(), bitmapList[list[0]].bits.end(), chosenList.bits.begin());
@@ -88,6 +85,56 @@ InvertedIndex S_BITMAP(int* list, vector<InvertedIndex>& idx, int num)
 						}
 					}
 				}
+			}
+		}
+	}
+	return res;
+}
+
+InvertedIndex SkipBitmap(int* queryList, vector<InvertedIndex>& idx, int num)
+{
+    copy(bitmapList[queryList[0]].secondIndex.begin(), bitmapList[queryList[0]].secondIndex.end(), chosenList.secondIndex.begin());
+	copy(bitmapList[queryList[0]].firstIndex.begin(), bitmapList[queryList[0]].firstIndex.end(), chosenList.firstIndex.begin());
+	copy(bitmapList[queryList[0]].bits.begin(), bitmapList[queryList[0]].bits.end(), chosenList.bits.begin());
+	InvertedIndex res;
+	for (int i = 1; i < num; i++)
+	{
+		list<int>::iterator tmp;
+		list<int>::iterator j = skipPointer.begin();
+		while (j!=skipPointer.end())
+		{
+			chosenList.secondIndex[*j] &= bitmapList[queryList[i]].secondIndex[*j];//按位与
+			if (chosenList.secondIndex[*j])
+			{
+				for (int t = (*j) * 32; t < (*j) * 32 + 32; t++)
+				{
+					chosenList.firstIndex[t] &= bitmapList[queryList[i]].firstIndex[t];//按位与
+					if (chosenList.firstIndex[t])
+					{
+						for (int l = t * 32; l < t * 32 + 32; l++)
+						{
+							chosenList.bits[l] &= bitmapList[queryList[i]].bits[l];//按位与
+							if (i == num - 1 && chosenList.bits[l])
+							{
+								int bit = chosenList.bits[l];//取出该段
+								for (int m = 0; m < 32; m++)
+								{
+									if ((bit & 1) != 0)
+										res.docIdList.push_back(32 * l + m);
+									bit = bit >> 1;
+								}
+							}
+						}
+							
+					}
+				}
+				j++;
+			}
+			else
+			{
+				tmp = j;
+				j++;
+				skipPointer.erase(tmp);
 			}
 		}
 	}

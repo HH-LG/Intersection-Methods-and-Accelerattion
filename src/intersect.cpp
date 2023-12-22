@@ -5,11 +5,10 @@
 #include "InvertedIndex.h"
 #include "util.h"
 #include "Adp.h"
-#include "Adp_SSE.h"
 #include "Bitmap.h"
 #include "Hash.h"
 
-#define Algorithm Bitmap
+#define Algorithm SkipBitmap
 
 using namespace std;
 	
@@ -42,9 +41,9 @@ int main() {
 	long long head, tail, freq;
 
 	//预处理
-	if (Algorithm == HASH)
+	if (Algorithm == Hash)
 		preprocessing(invertedLists, 2000);
-	if (Algorithm == Bitmap)
+	else if (Algorithm == Bitmap || Algorithm == SkipBitmap)
 		bitMapProcessing(invertedLists, 2000);
 	int step = 50;
 	for (int k = 50; k <= count; k += step)
