@@ -6,6 +6,7 @@
 #include "util.h"
 #include "Adp.h"
 #include "Bitmap.h"
+#include "SkipBitmap.h"
 #include "Hash.h"
 
 #define Algorithm SkipBitmap
