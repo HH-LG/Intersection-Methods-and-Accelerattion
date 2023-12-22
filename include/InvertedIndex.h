@@ -1,9 +1,9 @@
 #pragma once
-#include<string>
-#include<vector>
-#include<sstream>
-#include<Windows.h>
-#include<algorithm>
+#include <string>
+#include <vector>
+#include <sstream>
+#include <Windows.h>
+#include <algorithm>
 using namespace std;
 
 struct InvertedIndex // µ¹ÅÅË÷Òý½á¹¹

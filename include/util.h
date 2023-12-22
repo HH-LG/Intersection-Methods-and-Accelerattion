@@ -87,32 +87,3 @@ void getData(vector<InvertedIndex>& invertedLists,int query[1000][5],int& count)
 	}
 	cout << "here" << endl;
 }
-//int bits[2] = { 0 };
-//int x;
-//for (int i = 0; i < 4; i++)
-//{
-//	cin >> x;
-//	long long b = 1;
-//	if (x > 32)
-//	{
-//		b <<= x - 32;
-//		bits[1] |= b;
-//	}
-//	else
-//	{
-//		b <<= x;
-//		bits[0] |= b;
-//	}
-//}	
-//for (int i = 0; i < 2; i++)
-//{
-//	int cnt = i*32;
-//	int bit = bits[i];
-//	while (bit != 0)
-//	{
-//		if((bit&1)!=0)
-//			cout << cnt<< ' ';
-//		bit = bit >> 1;
-//		++cnt;
-//	}
-//}
