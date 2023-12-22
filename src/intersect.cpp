@@ -9,11 +9,11 @@
 #include "SkipBitmap.h"
 #include "Hash.h"
 
-#define Algorithm SkipBitmap
+// 使用不同的算法，只需要修改下面这一行
+// 可测试的算法包括：ADP, Bitmap, SkipBitmap, Hash
+#define Algorithm Hash
 
 using namespace std;
-	
-
 
 int main() {
 	//测试
@@ -55,6 +55,7 @@ int main() {
 			QueryPerformanceCounter((LARGE_INTEGER*)&tail);// End Time
 			totalTime += (tail - head) * 1000.0 / freq;
 		}
+		//cout << k << endl;
 		cout << totalTime/5<<endl;
 		if (k == 100)
 			step = 100;

@@ -1,8 +1,8 @@
 #pragma once
-#include<string>
-#include<vector>
-#include<algorithm>
-#include"InvertedIndex.h"
+#include <string>
+#include <vector>
+#include <algorithm>
+#include "InvertedIndex.h"
 using namespace std;
 
 // adp µœ÷
