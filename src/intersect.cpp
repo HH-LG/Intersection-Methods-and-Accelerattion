@@ -13,22 +13,7 @@
 
 using namespace std;
 	
-// 把倒排列表按长度排序
-void sorted(int* list, vector<InvertedIndex>& idx, int num) 
-{
-	for (int i = 0; i < num - 1; i++) 
-    {
-		for (int j = 0; j < num - i - 1; j++) 
-        {
-			if (idx[list[j]].length > idx[list[j + 1]].length) 
-            {
-				int tmp = list[j];
-				list[j] = list[j + 1];
-				list[j + 1] = tmp;
-			}
-		}
-	}
-}
+
 
 int main() {
 	//测试

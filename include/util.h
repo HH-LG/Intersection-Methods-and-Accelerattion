@@ -62,7 +62,6 @@ void getData(vector<InvertedIndex>& invertedLists,int query[1000][5],int& count)
 		sort(t->docIdList.begin(), t->docIdList.end());//对文档编号排序
 		invertedLists.push_back(*t);		//加入一个倒排表
 	}
-	cout << maxdocId << endl;
 	file.close();
 
 	// 读取查询数据
@@ -85,5 +84,21 @@ void getData(vector<InvertedIndex>& invertedLists,int query[1000][5],int& count)
 		}
 		count++;// 总查询数
 	}
-	cout << "here" << endl;
+}
+
+// 把倒排列表按长度排序
+void sorted(int* list, vector<InvertedIndex>& idx, int num) 
+{
+	for (int i = 0; i < num - 1; i++) 
+    {
+		for (int j = 0; j < num - i - 1; j++) 
+        {
+			if (idx[list[j]].length > idx[list[j + 1]].length) 
+            {
+				int tmp = list[j];
+				list[j] = list[j + 1];
+				list[j + 1] = tmp;
+			}
+		}
+	}
 }
