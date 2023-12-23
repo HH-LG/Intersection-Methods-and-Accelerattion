@@ -1,13 +1,13 @@
 #pragma once
-#include<iostream>
-#include<fstream>
-#include<string>
-#include<vector>
-#include<sstream>
-#include<Windows.h>
-#include<algorithm>
-#include"InvertedIndex.h"
-#include"Adp.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <sstream>
+#include <Windows.h>
+#include <algorithm>
+#include "InvertedIndex.h"
+#include "Adp.h"
 using namespace std;
 void verify()
 {
