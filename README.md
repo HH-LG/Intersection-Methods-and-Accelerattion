@@ -2,6 +2,7 @@
 IR-hw6 brain stroming for infomation retrieval
 
 ## 项目结构说明
+```
 ./
 │  .gitignore
 │  ExpIndex                 // 用于测试的索引文件(文件较大，未上传)
@@ -26,7 +27,7 @@ IR-hw6 brain stroming for infomation retrieval
 │
 └─src
         intersect.cpp        // 主程序
-
+```
 
 ## Usage
 
