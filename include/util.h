@@ -32,7 +32,7 @@ void verify()
 		sort(t.docIdList.begin(), t.docIdList.end());//∂‘Œƒµµ±‡∫≈≈≈–Ú
 		testInvertedLists.push_back(t);
 	}
-	InvertedIndex res = ADP(testQuery, testInvertedLists, 3);
+	InvertedIndex res = Adaptive(testQuery, testInvertedLists, 3);
 	for (auto i : res.docIdList)
 		cout << i << ' ';
 

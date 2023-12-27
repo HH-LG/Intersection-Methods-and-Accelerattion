@@ -15,7 +15,7 @@ public:
 bool operator<(const QueryItem& q1, const QueryItem& q2) {// 选剩余元素最少的元素
 	return (q1.length - q1.cursor) < (q2.length - q2.cursor);
 }
-InvertedIndex ADP(int* queryList, vector<InvertedIndex>& index, int num)
+InvertedIndex Adaptive(int* queryList, vector<InvertedIndex>& index, int num)
 {
 	InvertedIndex S;
 	QueryItem* list = new QueryItem[num]();

@@ -10,8 +10,8 @@
 #include "Hash.h"
 
 // 使用不同的算法，只需要修改下面这一行
-// 可测试的算法包括：ADP, Bitmap, SkipBitmap, Hash
-#define Algorithm Hash
+// 可测试的算法包括：Adaptive, Bitmap, SkipBitmap, Hash
+#define Algorithm SkipBitmap
 
 using namespace std;
 
@@ -56,7 +56,7 @@ int main() {
 			totalTime += (tail - head) * 1000.0 / freq;
 		}
 		//cout << k << endl;
-		cout << totalTime/5<<endl;
+		cout << k << "个查询用时："<< totalTime/5 << "ms" <<endl;
 		if (k == 100)
 			step = 100;
 		if (k == 400)

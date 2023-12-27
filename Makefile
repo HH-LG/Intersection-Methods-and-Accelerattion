@@ -2,7 +2,7 @@
 CC = g++
 
 # 定义编译选项
-CFLAGS = -Wall -std=c++11
+CFLAGS = -Wall -std=c++11 -fexec-charset=GBK
 INC = -I.\include
 OBJ_PATH = build\obj
 
